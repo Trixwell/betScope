@@ -1,0 +1,24 @@
+{
+  "name": "bet-scope",
+  "version": "1.0.0",
+  "description": "",
+  "main": "collect.js",
+  "dependencies": {
+    "mysql": "^2.15.0",
+    "request": "^2.85.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Trixwell/betScope.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Trixwell/betScope/issues"
+  },
+  "homepage": "https://github.com/Trixwell/betScope#readme"
+}
