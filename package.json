@@ -5,7 +5,8 @@
   "main": "collect.js",
   "dependencies": {
     "mysql": "^2.15.0",
-    "request": "^2.85.0"
+    "request": "^2.85.0",
+    "fast-html-parser": "^1.0.1"
   },
   "devDependencies": {},
   "scripts": {
