@@ -1,4 +1,5 @@
 const MARATHON_BET_ID = 1;
+const isValidJson = require('is-valid-json');
 exports.init = function (dbConnection) {
     this.dbo = dbConnection;
 
@@ -125,25 +126,27 @@ exports.loadFullInfo = function (event) {
             });
 
             resp.on('end', () => {
-                JSON.parse(data).forEach((row) => {
-                    if (row.replace === 'inner') {
-                        let dom = parser.parse(row.content);
-                        let all_prices = dom.querySelectorAll('.price');
+                if (isValidJson(data)) {
+                    JSON.parse(data).forEach((row) => {
+                        if (row.replace === 'inner') {
+                            let dom = parser.parse(row.content);
+                            let all_prices = dom.querySelectorAll('.price');
 
-                        let prices = [];
-                        all_prices.forEach((e) => {
-                            let data_sel = JSON.parse(e.attributes['data-sel']);
-                            prices.push({
-                                bet_price_id: data_sel.cid,
-                                json_data: e.attributes['data-sel'],
-                                label: data_sel.sn + " | " + data_sel.mn,
-                                bet: data_sel.epr
+                            let prices = [];
+                            all_prices.forEach((e) => {
+                                let data_sel = JSON.parse(e.attributes['data-sel']);
+                                prices.push({
+                                    bet_price_id: data_sel.cid,
+                                    json_data: e.attributes['data-sel'],
+                                    label: data_sel.sn + " | " + data_sel.mn,
+                                    bet: data_sel.epr
+                                });
                             });
-                        });
 
-                        insert_prices.load_prices(prices);
-                    }
-                });
+                            insert_prices.load_prices(prices);
+                        }
+                    });
+                }
             });
         }).on('error', (err) => {
         console.log('ERROR', err);
